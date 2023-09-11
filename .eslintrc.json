@@ -1,0 +1,5 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "no-unused-vars": ["error", { "vars": "none", "args": "none" }]
+}
