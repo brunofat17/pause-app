@@ -87,6 +87,12 @@ function reducer(state, action) {
         users: [...state.users, action.payload],
       };
 
+    case "account/deleteUser":
+      return {
+        ...state,
+        users: state.users.filter((user) => user.userName !== action.payload),
+      };
+
     case "account/login":
       if (
         state.users
@@ -135,17 +141,24 @@ function AppProvider({ children }) {
     dispatch({ type: "account/logout" });
   }
 
-  function applyAssessementForm(assessementObject) {
-    dispatch({
-      type: "assessement/submit",
-      payload: assessementObject,
-    });
-  }
-
   function applyNewUserForm(newUser) {
     dispatch({
       type: "account/createNewUser",
       payload: newUser,
+    });
+  }
+
+  function deleteUser(userName) {
+    dispatch({
+      type: "account/deleteUser",
+      payload: userName,
+    });
+  }
+
+  function applyAssessementForm(assessementObject) {
+    dispatch({
+      type: "assessement/submit",
+      payload: assessementObject,
     });
   }
 
@@ -173,6 +186,7 @@ function AppProvider({ children }) {
         logInUserType,
         applyAssessementForm,
         applyNewUserForm,
+        deleteUser,
         createNutriPlan,
         createTrainingPlan,
       }}

@@ -23,8 +23,8 @@ function NewUserForm() {
     navigate("/");
   }
 
-  function onError() {
-    console.log("test errors");
+  function onError(e) {
+    console.log(e);
   }
 
   return (
@@ -51,7 +51,7 @@ function NewUserForm() {
         <Label htmlFor="confirmedPassword">Confirmar Password</Label>
         <Input
           {...register("confirmedPassword", {
-            validate: (value) => (value = password),
+            // validate: (value) => (value = password),
           })}
         />
       </FormRow>
