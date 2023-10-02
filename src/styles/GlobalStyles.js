@@ -90,7 +90,7 @@ button,
 textarea,
 select {
   font: inherit;
-  color: inherit;
+  color: var(--color-grey-700);
 }
 
 button {

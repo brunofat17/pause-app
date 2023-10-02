@@ -5,27 +5,26 @@ import { SiFranprix } from "react-icons/si";
 import { LuDumbbell } from "react-icons/lu";
 import { useApp } from "../contexts/AppContext";
 
-  const StyledNavLink = styled(NavLink)`
-    color: var(--color-grey-100);
-    font-weight: 200;
-    font-size: 18px;
-  `;
+const StyledNavLink = styled(NavLink)`
+  color: var(--color-grey-100);
+  font-weight: 200;
+  font-size: 18px;
+`;
 
-  const Li = styled.li`
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
-    gap: 10px;
-  `;
+const Li = styled.li`
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  gap: 10px;
+`;
 
-  const Ul = styled.ul``;
+const Ul = styled.ul``;
 
-  const Span = styled.span`
-    padding-bottom: 2px;
-  `;
+const Span = styled.span`
+  padding-bottom: 2px;
+`;
 function MainNav() {
-
   const { logInUserType } = useApp();
 
   return (
@@ -40,6 +39,11 @@ function MainNav() {
           <SiFranprix /> Nutrição
         </StyledNavLink>
       </Ul>
+      <Ul>
+        <StyledNavLink to="/treino">
+          <LuDumbbell /> <Span>Treino</Span>
+        </StyledNavLink>
+      </Ul>
       {logInUserType === "admin" && (
         <Ul>
           <StyledNavLink to="/staff">
@@ -47,11 +51,6 @@ function MainNav() {
           </StyledNavLink>
         </Ul>
       )}
-      <Ul>
-        <StyledNavLink to="/estúdio">
-          <LuDumbbell /> <Span>Estúdio</Span>
-        </StyledNavLink>
-      </Ul>
     </Li>
   );
 }

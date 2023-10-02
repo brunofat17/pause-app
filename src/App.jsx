@@ -6,10 +6,11 @@ import HomePage from "./pages/HomePage";
 import Avaliação from "./pages/Avaliação";
 import Nutrição from "./pages/Nutrição";
 import Staff from "./pages/Staff";
-import Estúdio from "./pages/Estúdio";
 import { AppProvider } from "./contexts/AppContext";
 import LogIn from "./pages/LogIn";
 import Logout from "./pages/Logout";
+import Treino from "./pages/Treino";
+import NewUserForm from "./pages/NewUserForm";
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
               <Route path="/avaliação" element={<Avaliação />} />
               <Route path="/nutrição" element={<Nutrição />} />
               <Route path="/staff" element={<Staff />} />
-              <Route path="/estúdio" element={<Estúdio />} />
+              <Route path="/treino" element={<Treino />} />
               <Route path="/login" element={<LogIn />} />
               <Route path="/logout" element={<Logout />} />
+              <Route path="/new-user" element={<NewUserForm />} />
             </Route>
           </Routes>
         </BrowserRouter>
