@@ -2,6 +2,11 @@ import { useState } from "react";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
 import Item from "../../ui/Item";
+import styled from "styled-components";
+
+const StyledDiv = styled.div`
+  margin-bottom: 150px;
+`;
 
 function TodoList() {
   const [input, setInput] = useState("");
@@ -18,7 +23,7 @@ function TodoList() {
   }
 
   return (
-    <div>
+    <StyledDiv>
       <h2>To Do List</h2>
       <div>
         <Input
@@ -35,7 +40,7 @@ function TodoList() {
           <Item item={item} key={item.id} list={list} setList={setList} />
         ))}
       </ul>
-    </div>
+    </StyledDiv>
   );
 }
 

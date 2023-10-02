@@ -11,6 +11,7 @@ import LogIn from "./pages/LogIn";
 import Logout from "./pages/Logout";
 import Treino from "./pages/Treino";
 import NewUserForm from "./pages/NewUserForm";
+import DeleteUserPage from "./pages/DeleteUserPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/login" element={<LogIn />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/new-user" element={<NewUserForm />} />
+              <Route path="/delete-user" element={<DeleteUserPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
