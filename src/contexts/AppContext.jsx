@@ -26,10 +26,9 @@ const initialState = {
       userName: "user",
       password: "user",
       userType: "user",
-      assessements: [
-        { month: "february", year: 2023, id: 1 },
-        { month: "march", year: 2023, id: 2 },
-      ],
+      assessements: [],
+      nutriPlans: [],
+      trainingPlans: [],
     },
   ],
   activeUserName: "",
@@ -39,7 +38,6 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "assessement/submit":
-      console.log(state.users);
       return {
         ...state,
         users: state.users.map((user) => {
@@ -53,17 +51,47 @@ function reducer(state, action) {
         }),
       };
 
-    case "assessement/consult":
-      return;
+    case "nutrition/submit":
+      return {
+        ...state,
+        users: state.users.map((user) => {
+          console.log(action.payload);
+          if (user.userName.toString() === action.payload.name.toString()) {
+            return {
+              ...user,
+              nutriPlans: [...user.nutriPlans, action.payload],
+            };
+          }
+          return user;
+        }),
+      };
 
-    case "account/createUser":
-      return;
+    case "trainingPlan/submit":
+      return {
+        ...state,
+        users: state.users.map((user) => {
+          console.log(action.payload);
+          if (user.userName.toString() === action.payload.name.toString()) {
+            return {
+              ...user,
+              trainingPlans: [...user.trainingPlans, action.payload],
+            };
+          }
+          return user;
+        }),
+      };
+
+    case "account/createNewUser":
+      return {
+        ...state,
+        users: [...state.users, action.payload],
+      };
 
     case "account/login":
       if (
         state.users
-          .filter((user) => action.payloadUserName === user.userName)
-          .some((user) => action.payloadPassword === user.password)
+          .filter((user) => user.userName === action.payloadUserName)
+          .some((user) => user.password === action.payloadPassword)
       )
         return {
           ...state,
@@ -107,16 +135,47 @@ function AppProvider({ children }) {
     dispatch({ type: "account/logout" });
   }
 
-  function applyForm(assessementObject) {
+  function applyAssessementForm(assessementObject) {
     dispatch({
       type: "assessement/submit",
       payload: assessementObject,
     });
   }
 
+  function applyNewUserForm(newUser) {
+    dispatch({
+      type: "account/createNewUser",
+      payload: newUser,
+    });
+  }
+
+  function createNutriPlan(nutriPlan, name, date) {
+    dispatch({
+      type: "nutrition/submit",
+      payload: { nutriPlan, name, date, id: crypto.randomUUID() },
+    });
+  }
+
+  function createTrainingPlan(trainingPlan, name, date) {
+    dispatch({
+      type: "trainingPlan/submit",
+      payload: { trainingPlan, name, date, id: crypto.randomUUID() },
+    });
+  }
+
   return (
     <AppContext.Provider
-      value={{ users, activeUserName, login, logout, logInUserType, applyForm }}
+      value={{
+        users,
+        activeUserName,
+        login,
+        logout,
+        logInUserType,
+        applyAssessementForm,
+        applyNewUserForm,
+        createNutriPlan,
+        createTrainingPlan,
+      }}
     >
       {children}
     </AppContext.Provider>

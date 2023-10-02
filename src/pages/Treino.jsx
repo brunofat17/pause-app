@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { useApp } from "../contexts/AppContext";
-
+import CreateTrainingPlan from "../features/plano treino/CreateTrainingPlan";
+import PlanoTreinoDisplay from "../features/plano treino/PlanoTreinoDisplay";
 import Button from "../ui/Button";
-import NutriçãoDislplay from "../features/nutrição/NutriçãoDisplay";
-import CreateNutriPlan from "../features/nutrição/CreateNutriPlan";
 
-function Nutrição() {
+function Treino() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentNutriPlanId, setCurrentNutriPlanId] = useState();
+  const [currentTrainingPlan, setCurrentTrainingPlanId] = useState();
   const { logInUserType, users, activeUserName } = useApp();
 
   return (
     <>
-      <h2>Consultar Plano de Nutrição</h2>
+      <h2>Consultar Planos de treino</h2>
+
       {!logInUserType &&
-        "Deve fazer o log in para consultar a secção de nutrição"}
+        "Deve fazer o log in para consultar a secção de planos de treino"}
 
       {logInUserType === "admin" &&
         (isOpen ? (
-          <CreateNutriPlan setIsOpen={setIsOpen} />
+          <CreateTrainingPlan setIsOpen={setIsOpen} />
         ) : (
           <Button onClick={() => setIsOpen(!isOpen)}>
             {isOpen === false ? "Novo plano" : "Fechar"}
@@ -26,25 +26,25 @@ function Nutrição() {
         ))}
 
       {logInUserType === "user" &&
-        (users.find((user) => user.userName === activeUserName)?.nutriPlans
+        (users.find((user) => user.userName === activeUserName)?.trainingPlans
           ?.length > 0 ? (
           isOpen ? (
             <>
-              <NutriçãoDislplay nutriPlanId={currentNutriPlanId} />
+              <PlanoTreinoDisplay trainingPlanId={currentTrainingPlan} />
               <Button onClick={() => setIsOpen(false)}>Voltar</Button>
             </>
           ) : (
             users
               .find((user) => user.userName === activeUserName)
-              ?.nutriPlans?.map((nutriPlan) => (
-                <ul key={nutriPlan.id}>
+              ?.trainingPlans?.map((trainingPlan) => (
+                <ul key={trainingPlan.id}>
                   <Button
                     onClick={() => {
                       setIsOpen(true);
-                      setCurrentNutriPlanId(nutriPlan.id);
+                      setCurrentTrainingPlanId(trainingPlan.id);
                     }}
                   >
-                    Plano nutricional de {nutriPlan.date}
+                    Plano de {trainingPlan.date}
                   </Button>
                 </ul>
               ))
@@ -56,4 +56,4 @@ function Nutrição() {
   );
 }
 
-export default Nutrição;
+export default Treino;

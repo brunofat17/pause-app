@@ -10,7 +10,7 @@ function LogIn() {
 
   function onSubmit({ loginUserName, loginPassword }) {
     console.log(loginUserName, loginPassword);
-    login(loginUserName, loginPassword);
+    login(loginUserName.toString(), loginPassword.toString());
     navigate("/homepage");
 
     return;

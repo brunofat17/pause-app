@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { styled } from "styled-components";
+
 import {
   Div,
   Form,
@@ -11,9 +11,9 @@ import {
 } from "../../ui/Form";
 import { useApp } from "../../contexts/AppContext";
 
-function AvaliaçãoForm({ setIsOpen }) {
+function CreateAvaliaçãoForm({ setIsOpen }) {
   const { register, handleSubmit } = useForm();
-  const { applyForm } = useApp();
+  const { applyAssessementForm } = useApp();
 
   function onSubmit({
     name,
@@ -42,7 +42,7 @@ function AvaliaçãoForm({ setIsOpen }) {
       metabolicAge,
       id: crypto.randomUUID(),
     };
-    applyForm(assessementObject);
+    applyAssessementForm(assessementObject);
 
     setIsOpen(false);
   }
@@ -126,4 +126,4 @@ function AvaliaçãoForm({ setIsOpen }) {
     </Form>
   );
 }
-export default AvaliaçãoForm;
+export default CreateAvaliaçãoForm;
